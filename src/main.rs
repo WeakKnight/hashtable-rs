@@ -100,7 +100,6 @@ fn main() {
     hash_a = murmur_add(hash_a, encode_voxel_key(a.y));
     hash_a = murmur_add(hash_a, encode_voxel_key(a.z));
     let (_, bucket_a) = hash_table.add(hash_a);
-    println!("bucket is {}", bucket_a);
     let a_radiance:f32 = 90.0;
     hash_table_value[bucket_a as usize] = a_radiance;
 
@@ -110,7 +109,12 @@ fn main() {
     hash_b = murmur_add(hash_b, encode_voxel_key(b.y));
     hash_b = murmur_add(hash_b, encode_voxel_key(b.z));
     let (_, bucket_b) = hash_table.add(hash_b);
-    println!("bucket is {}", bucket_b);
     let b_radiance:f32 = 20.0;
     hash_table_value[bucket_b as usize] = b_radiance;
+
+    let (_, bucket_a) = hash_table.find(hash_a);
+    println!("radiance a is {}", hash_table_value[bucket_a as usize]);
+
+    let (_, bucket_b) = hash_table.find(hash_b);
+    println!("radiance b is {}", hash_table_value[bucket_b as usize]);
 }
